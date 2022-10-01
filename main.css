@@ -1,3 +1,65 @@
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~KLEUREN PALLETTE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Mountbatten Pink                  #987284  
+Maximum Blue Green                #75B9BE 
+Pale Spring Bud                   #D0D6B5  
+Melon                             #F9B5AC  
+Light Coral                       #EE7674  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 *{
-    
+    padding: 0px;
+    margin:0px;
+    box-sizing: border-box;
+    font-family: 'ABeeZee', sans-serif;
+    font-weight: bold;
+}
+body{
+    display: flex;
+    justify-content: center;
+}
+#inputWrapper{
+    display: flex;
+    justify-content: center;
+}
+#input{
+    height: 25px;
+    border: 2px solid #4c0a09;
+    border-radius: 4px;
+    width: 40%;
+}
+#rapper{
+    background: #F9B5AC;
+    box-shadow: 2px 0px 50px 10px #4c0a09;
+    width: 90vw;
+    height: 100vh;
+    padding: 20px 20px;
+}
+#output{
+    list-style-type: none;
+    margin-top: 10px;
+}
+.toDo{
+    width: 80%;
+    color: white;
+    border: 2px solid #408489;
+    background: #75B9BE;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.btnStyle{
+    background: #EE7674;
+    border: 2px solid #4c0a09;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    width: 80px;
+    height:25px;
+}
+.toDoLi{
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
