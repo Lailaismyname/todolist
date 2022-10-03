@@ -1,49 +1,65 @@
 window.addEventListener('load', ()=>{
-    let input = document.getElementById("input");
-    let inputBtn = document.getElementById('btn-input');
-    let output = document.getElementById("output");
-    output.innerHTML = localStorage.getItem('toDoList' ,output);
-    //maak item
-    inputBtn.addEventListener('click', ()=>{
-        const toDoItem =    `<li class='toDoLi'>
-                            <p class='toDo'>${input.value}</p>
-                            <button class="doneBtn btnStyle">Done</button>
-                            <button class="delBtn btnStyle">Delete</button>
-                            </li>`; 
+    //Buttons en input
+    const input = document.querySelector('#input');
+    const addToDoBtn = document.querySelector('#btn-input');
+    const output = document.querySelector('#output');
+
+    //maak array met items uit local storage OF gewoon een lege. Logical kan ook in variabel, weer wat geleerd
+    let toDoItems = JSON.parse(localStorage.getItem('toDoList')) || [];
+
+    function clearToDo(arr,spliceStart,parentItem){
+        //verwijdert element uit de array, uit het scherm en update de local storage
+        arr.splice(spliceStart,1);
+        parentItem.remove();
+        localStorage.setItem('toDoList', JSON.stringify(arr));
+    }
+
+    //als de pagina geladen is print de todo's
+    printToDo(toDoItems);
+
+    addToDoBtn.addEventListener('click', (event)=>{
         if(input.value !== ''){
-            output.innerHTML += toDoItem;
+            toDoItems.unshift(input.value);
+        //console.log(toDoItems);
+        localStorage.setItem('toDoList', JSON.stringify(toDoItems));
+        //Leeg het scherm
+        output.innerHTML = '';
+        //print todo's
+        printToDo(JSON.parse(localStorage.getItem('toDoList')))
+        //leeg todo input
+        input.value = '';
         }
-        console.log(output);
-        localStorage.setItem('toDoList', output)
+        else{
+            input.placeholder = 'Typ hier je to do item';
+        }
     })
-    
-    //delete item   
-    output.addEventListener('click',(event)=>{
-        const parentElement = event.target.parentElement; 
+
+    //Print de To Do List op het scherm
+    function printToDo(array){
+        for(let i = 0; i < array.length; i++){
+            let inputToDo = `<li class="toDoLi"><button class="doneBtn btnStyle">Done</button><span class="toDo">${array[i]}</span><button class="delBtn btnStyle">X</button></li>`;
+            document.getElementById('output').innerHTML += inputToDo;
+        }
+    }
+    //delete en done knop
+    output.addEventListener('click', (event)=>{
+        const parentItem = event.target.parentElement;
         if(event.target.classList.contains('doneBtn')){
-            parentElement.remove();
+            //zoek element in de array
+            let spliceStartDone = toDoItems.indexOf(event.target.nextElementSibling.textContent);
+            //verwijder element uit array en scherm
+           clearToDo(toDoItems,spliceStartDone,parentItem);
+
         }
         else if(event.target.classList.contains('delBtn')){
-            parentElement.remove();
-            console.log('niet gedaan');
+            //zoek element in de array
+            let spliceStartDel = toDoItems.indexOf(event.target.previousElementSibling.textContent);
+            //verwijder element uit array en scherm
+            clearToDo(toDoItems,spliceStartDel,parentItem);
         }
-        localStorage.setItem('toDoList', output);
-        })
-   
-
-
-    //je hebt 3 phases, capture phase die gaat van ouder naar kind
-    //en catch. die ??
-    //bubbling phase die van kind naar ouder. 
-    //default is bubble en door die true toe te voegen als derde parameter gaat ie over tot  captuure
+    })
 })
 
 
-// TODO mooi maken
-// shit opslaan in local storage
-// punten systeem toevoegen want gamifying shit maakt alles beter. 
-// rank toevoegen en mischien een rank meter? en dan badges voor elke rank ofzo
-//bijhouden hoeveel er niet gedaan zijn. En dan om de zoveel niet gedaan trek je een punt af ofzo?
 
-//oke die localstorage gaat niet helemaal goed... ff uitzoeke hoe ik dit moet doen? 
-        
+//wat kan ik hier nog aan toevoegen? rank system met badges ofzo? en punten aftrek als er een item verwijderd word zonder gedaan te zijn?
