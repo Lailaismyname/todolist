@@ -1,9 +1,13 @@
 window.addEventListener('load', ()=>{
+    let score = Number(localStorage.getItem('score')) || 0;
+    let lazyBones = Number(localStorage.getItem('lazyBones')) || 0;
+    let userName = localStorage.getItem('username') || 'type your name here';
     //Buttons en input
     const input = document.querySelector('#input');
     const addToDoBtn = document.querySelector('#btn-input');
     const output = document.querySelector('#output');
-
+    const actTtracker = document.querySelector('#actTracker');
+    const userNameInput = document.querySelector('#userName');
     //maak array met items uit local storage OF gewoon een lege. Logical kan ook in variabel, weer wat geleerd
     let toDoItems = JSON.parse(localStorage.getItem('toDoList')) || [];
 
@@ -14,8 +18,14 @@ window.addEventListener('load', ()=>{
         localStorage.setItem('toDoList', JSON.stringify(arr));
     }
 
-    //als de pagina geladen is print de todo's
+    //als de pagina geladen is print de todo's, activity tracker en naam
     printToDo(toDoItems);
+    actTtracker.textContent = `You did ${score} things and you have ${lazyBones} lazy bones!`;
+    userNameInput.value = JSON.parse(localStorage.getItem('username'));
+    //eventlistener op username invoer
+    userNameInput.addEventListener('blur', (event)=>{
+        localStorage.setItem('username',JSON.stringify(userNameInput.value));
+    })
 
     addToDoBtn.addEventListener('click', (event)=>{
         if(input.value !== ''){
@@ -49,17 +59,18 @@ window.addEventListener('load', ()=>{
             let spliceStartDone = toDoItems.indexOf(event.target.nextElementSibling.textContent);
             //verwijder element uit array en scherm
            clearToDo(toDoItems,spliceStartDone,parentItem);
-
+           score++;
+           localStorage.setItem('score', score);
+           actTtracker.textContent = `You did ${score} things and you have ${lazyBones} lazy bones!`;
         }
         else if(event.target.classList.contains('delBtn')){
             //zoek element in de array
             let spliceStartDel = toDoItems.indexOf(event.target.previousElementSibling.textContent);
             //verwijder element uit array en scherm
             clearToDo(toDoItems,spliceStartDel,parentItem);
+            lazyBones++;
+            localStorage.setItem('lazyBones', lazyBones);
+            actTtracker.textContent = `You did ${score} things and you have ${lazyBones} lazy bones!`;
         }
     })
 })
-
-
-
-//wat kan ik hier nog aan toevoegen? rank system met badges ofzo? en punten aftrek als er een item verwijderd word zonder gedaan te zijn?
