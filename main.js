@@ -20,7 +20,7 @@ window.addEventListener('load', ()=>{
 
     //als de pagina geladen is print de todo's, activity tracker en naam
     printToDo(toDoItems);
-    actTtracker.textContent = `You did ${score} things and you have ${lazyBones} lazy bones!`;
+    actTtracker.innerHTML = `You did <span class="grey-text">${score}</span> things and you have <span class="grey-text">${lazyBones}</span> lazy bones!`;
     userNameInput.value = JSON.parse(localStorage.getItem('username'));
     //eventlistener op username invoer
     userNameInput.addEventListener('blur', (event)=>{
