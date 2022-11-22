@@ -30,7 +30,7 @@ window.addEventListener('load', ()=>{
     addToDoBtn.addEventListener('click', (event)=>{
         if(input.value !== ''){
             toDoItems.unshift(input.value);
-        //console.log(toDoItems);
+        //sla op in local storage
         localStorage.setItem('toDoList', JSON.stringify(toDoItems));
         //Leeg het scherm
         output.innerHTML = '';
