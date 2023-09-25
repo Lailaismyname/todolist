@@ -1,5 +1,6 @@
 # todolist 
-This is a basic <a href="https://lailaismyname.github.io/todolist/">To do list</a> that i made.
+This is a basic To do list that i made. <br>
+Live version can be found <a href="https://lailaismyname.github.io/todolist/">here</a> </br>
 It keeps track of how many tasks have been completed as well as how many tasks have not been completed. <br>
 So don't be a lazy bones and complete all those tasks!
 
