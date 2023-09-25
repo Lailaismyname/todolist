@@ -8,9 +8,6 @@ So don't be a lazy bones and complete all those tasks!
 How it's made: <br>
 Html, css and Javascript. 
 
-What i learned:  <br>
-I learned how to use localStorage
-
 Screenshot: <br>
 ![ScreenShot](https://raw.githubusercontent.com/Lailaismyname/todolist/master/todolist.png)
 
